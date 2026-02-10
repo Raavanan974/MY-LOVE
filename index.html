@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Mon Ange ❤️</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+body{
+  margin:0;
+  overflow:hidden;
+  background:#0b1d3a;
+}
+
+/* 🔐 LOCK SCREEN */
+#lock{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(135deg,#ff758f,#ff7eb3);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  color:white;
+}
+#lock input{
+  font-size:24px;
+  padding:12px;
+  width:160px;
+  text-align:center;
+  border:none;
+  border-radius:12px;
+  margin-top:15px;
+}
+#lock button{
+  margin-top:15px;
+  padding:10px 26px;
+  border:none;
+  border-radius:25px;
+  font-size:18px;
+  background:white;
+  color:#ff4d6d;
+}
+.shake{animation:shake .3s;}
+@keyframes shake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}
+  50%{transform:translateX(5px)}
+  75%{transform:translateX(-5px)}
+  100%{transform:translateX(0)}
+}
+
+/* 🌸 NORMAL LOVE PAGES */
+.page{
+  display:none;
+  height:100vh;
+  width:100vw;
+  text-align:center;
+  padding:20px;
+  background:linear-gradient(135deg,#1d3557,#457b9d);
+}
+.page.active{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+h1{
+  color:white;
+  text-shadow:2px 2px 12px rgba(0,0,0,.6);
+}
+
+button{
+  padding:12px 26px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  margin:12px;
+  cursor:pointer;
+  position:relative;
+}
+.yes{
+  background:#ff4d6d;
+  color:white;
+}
+.no{
+  background:white;
+  color:#333;
+  position:absolute;
+}
+
+/* 💙 FINAL PAGE WITH PHOTO */
+.page4{
+  background:
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+    url("bg.jpg") center/cover no-repeat;
+  overflow:auto;
+}
+
+/* 💙 BLUE HEARTS */
+.heart{
+  position:absolute;
+  width:18px;
+  height:18px;
+  background:#4cc9f0;
+  transform:rotate(45deg);
+  animation:float 10s linear infinite;
+}
+.heart:before,.heart:after{
+  content:'';
+  position:absolute;
+  width:18px;
+  height:18px;
+  background:#4cc9f0;
+  border-radius:50%;
+}
+.heart:before{top:-9px;left:0;}
+.heart:after{left:-9px;top:0;}
+
+@keyframes float{
+  0%{bottom:-10%;opacity:0;}
+  50%{opacity:.6;}
+  100%{bottom:110%;opacity:0;}
+}
+
+.poem{
+  max-width:720px;
+  line-height:1.8;
+  font-size:16px;
+  white-space:pre-line;
+  color:white;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔐 LOCK -->
+<div id="lock">
+  <h1>🔐 Enter Our Secret Code 💕</h1>
+  <input type="password" id="pass" maxlength="4" placeholder="**">
+  <button onclick="unlock()">Open 💖</button>
+  <p id="msg"></p>
+</div>
+
+<!-- 🎵 BGM -->
+<audio id="bgm" loop>
+  <source src="bgm.mp3">
+</audio>
+
+<!-- 😂 FUNNY SOUND -->
+<audio id="funnySound">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-cartoon-bubble-pop-2169.mp3">
+</audio>
+
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+  <h1>Enna unaku pudichiruka? 💕</h1>
+  <button class="yes" onclick="nextPage(2)">Yes 😌</button>
+  <button class="no" onmouseover="escapeBtn(this)">No 😏</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <h1>Apo ithu Love thana Mon Ange? 💖</h1>
+  <button class="yes" onclick="nextPage(3)">Kandipa 🙈</button>
+  <button class="no" onmouseover="escapeBtn(this)">I think 🤔</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <h1>Appo Namma Kalyanam panikalama di? 🙈</h1>
+  <button class="yes" onclick="nextPage(4)">Sekirama panikalam 💍</button>
+  <button class="no" onmouseover="escapeBtn(this)">Ipo venam 😜</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page page4" id="p4">
+  <h1>💙 Luv you di chellameyyyyyyyy 😘 💙</h1>
+  <br><br>
+  <div class="poem">
+En veral idukkula
+Un veral kedakkanum
+Nasungura alavukku irukki
+Na pudikkanum
+Naan kanna thorakkaiyil
+Un mugam theriyanum
+Usurulla varaikkumae
+Unakkenna pudikkanum
+Kadal alai pola unkaal thottu orasi
+Kadal ulla poravan naan illa di
+Kadal manna pola un kaaloda otti
+Kara thaandum vara naan irupenadi
+
+Kannaana kanne nee kalangadhadi
+En uyiroda aadharam needhanadi..
+Kannaana kanne nee kalangadhadi
+Yaar pona enna naan irupenadi
+  </div>
+</div>
+
+<script>
+const PASSWORD="1605";
+
+function unlock(){
+  const l=document.getElementById("lock");
+  if(document.getElementById("pass").value===PASSWORD){
+    l.style.display="none";
+    document.getElementById("bgm").play();
+  }else{
+    l.classList.add("shake");
+    document.getElementById("msg").innerText="Wrong password 😜";
+    setTimeout(()=>l.classList.remove("shake"),300);
+  }
+}
+
+function nextPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p'+n).classList.add('active');
+  document.getElementById("bgm").play();
+}
+
+function escapeBtn(btn){
+  document.getElementById("funnySound").play();
+  btn.style.left=Math.random()*(window.innerWidth-120)+"px";
+  btn.style.top=Math.random()*(window.innerHeight-60)+"px";
+}
+
+/* 💙 Hearts */
+function hearts(){
+  const h=document.createElement('div');
+  h.className='heart';
+  h.style.left=Math.random()*100+'vw';
+  h.style.animationDuration=(6+Math.random()*6)+'s';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),12000);
+}
+setInterval(hearts,700);
+</script>
+
+</body>
+</html>
